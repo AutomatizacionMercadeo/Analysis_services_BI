@@ -46,7 +46,7 @@ if hora == 6 and 0 <= minute <= 5:
 
 
 # Es la hora de pausar el servicio (6:00 PM)
-if hora == 18 and 0 <= minute <= 5:
+if hora == 17 and 30 <= minute <= 40:
     try:
         resultado_pausa = pausar_analysis_services()
         print(f"Resultado de pausar Analysis Services: {resultado_pausa}")

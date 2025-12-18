@@ -1,7 +1,7 @@
 from src.Email.EnviarCorreo import Envio_Correo
 
 
-def Estructura_Exitoso():
+def Estructura_Exitoso(estado):
     asunto = "Ejecución Exitosa - Azure Analysis Services"
 
     body = (
@@ -10,6 +10,7 @@ def Estructura_Exitoso():
         "<p>Estimado usuario,</p>"
         "<p>La ejecución del proceso en <b>Azure Analysis Services</b> se realizó correctamente.<br>"
         "No se detectaron errores durante la operación.</p>"
+        f"<p><b>Estado final:</b> {estado}</p>"
         "<p>Saludos,<br>Equipo de Automatización</p>"
         "</body>"
         "</html>"

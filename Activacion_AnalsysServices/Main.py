@@ -27,7 +27,7 @@ if hora == 6 and 0 <= minute <= 5:
             
             if estado.strip('"') == "Succeeded":
                 print("Analysis Services reanudado correctamente.")
-                Estructura_Exitoso()
+                Estructura_Exitoso(estado.strip('"'))
                 break
             elif estado.strip('"') in ["Resuming", "Provisioning"]:
                 print("Esperando a que el estado sea 'Succeeded'...")
@@ -60,7 +60,7 @@ if hora == 18 and 0 <= minute <= 5:
             
             if estado.strip('"') == "Paused":
                 print("Analysis Services pausado correctamente.")
-                Estructura_Exitoso()
+                Estructura_Exitoso(estado.strip('"'))
                 break
             elif estado.strip('"') == "Suspending":
                 print("Esperando a que el estado sea 'Paused'...")

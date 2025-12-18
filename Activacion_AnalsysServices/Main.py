@@ -19,7 +19,7 @@ if hora == 6 and 0 <= minute <= 5:
         print(f"Resultado de reanudar Analysis Services: {resultado_reanudar}")
 
         # Reintentos hasta 5 minutos (300 segundos), cada 10 segundos
-        max_reintentos = 30
+        max_reintentos = 10
         reintento = 0
         while reintento < max_reintentos:
             estado = obtener_estado_analysis_services()
@@ -31,7 +31,7 @@ if hora == 6 and 0 <= minute <= 5:
                 break
             elif estado.strip('"') in ["Resuming", "Provisioning"]:
                 print("Esperando a que el estado sea 'Succeeded'...")
-                time.sleep(10)
+                time.sleep(30)
                 reintento += 1
             else:
                 print(f"Estado inesperado: {estado}")
@@ -46,13 +46,13 @@ if hora == 6 and 0 <= minute <= 5:
 
 
 # Es la hora de pausar el servicio (6:00 PM)
-if hora == 17 and 30 <= minute <= 40:
+if hora == 18 and 0 <= minute <= 5:
     try:
         resultado_pausa = pausar_analysis_services()
         print(f"Resultado de pausar Analysis Services: {resultado_pausa}")
 
         # Reintentos hasta 5 minutos (300 segundos), cada 10 segundos
-        max_reintentos = 30
+        max_reintentos = 10
         reintento = 0
         while reintento < max_reintentos:
             estado = obtener_estado_analysis_services()
@@ -64,7 +64,7 @@ if hora == 17 and 30 <= minute <= 40:
                 break
             elif estado.strip('"') == "Suspending":
                 print("Esperando a que el estado sea 'Paused'...")
-                time.sleep(10)
+                time.sleep(30)
                 reintento += 1
             else:
                 print(f"Estado inesperado: {estado}")

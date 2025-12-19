@@ -58,7 +58,7 @@ if hora == 6 and 0 <= minute <= 5:
 
 
 # Es la hora de pausar el servicio (6:00 PM)
-if hora == 18 and 0 <= minute <= 5:
+if hora == 11 and 0 <= minute <= 30:
     try:
         # Login en Azure antes de intentar pausar
         login_result = az_login_service_principal()
@@ -95,9 +95,3 @@ if hora == 18 and 0 <= minute <= 5:
     except Exception as e:
         print(f"Error al pausar Analysis Services: {e}")
         Estructura_Error(e)
-
-
-if __name__ == "__main__":
-    az_login_service_principal()
-    estado = obtener_estado_analysis_services()
-    print(f"Estado actual de Analysis Services en la tarde: {estado}")

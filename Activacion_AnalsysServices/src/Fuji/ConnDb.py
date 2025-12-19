@@ -1,7 +1,7 @@
 import oracledb
 from src.Fuji.get_data import get_datos_id
 
-def conn_db(id_unico):
+def conn_azure(id_unico):
     
     data = get_datos_id(id_unico)
 
@@ -9,27 +9,11 @@ def conn_db(id_unico):
         return None, None, None
     else:
         # Extraer las variables del objeto data para la conexión a la base de datos
-        pwd = data['tenant_id'] 
-        user_Redi = data['user_sig']
-        pass_Redi = data['pass_sig']
+        client = data['user_sig'] 
+        tenant = data['pass_sig']
+        client_secret = data['url']
         
-        return user_Redi, pass_Redi, pwd
-
-
-def conn_db_SFTP(id_unico):
-    
-    data = get_datos_id(id_unico)
-
-    if data is None:
-        return None, None, None, None
-    else:
-        # Extraer las variables del objeto data para la conexión a la base de datos
-        Host_SFTP = data['client_id'] 
-        user_SFTP = data['tenant_id']
-        pass_SFTP = data['secret_id']
-        port_SFTP = data['server_smtp']
-        
-        return Host_SFTP, user_SFTP, pass_SFTP, port_SFTP
+        return client, tenant, client_secret
 
 
 def conn_db_correo(id_unico):

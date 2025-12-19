@@ -1,6 +1,8 @@
 import subprocess, os
 from dotenv import load_dotenv
 
+from src.Fuji.ConnDb import conn_azure
+
 load_dotenv()
 
 ruta = os.getenv('RUTA_AZURE')
@@ -37,3 +39,22 @@ def reanudar_analysis_services():
 		return resultado.stdout.strip()
 	except Exception as e:
 		return f"Error al reanudar: {str(e)}"
+
+
+def az_login_service_principal():
+
+	client, tenant, secret = conn_azure('16')
+
+	if not all([client, tenant, secret]):
+		return "Faltan credenciales AZ_CLIENT_ID/AZ_TENANT_ID/AZ_CLIENT_SECRET"
+	try:
+		# Se envuelve el secret entre comillas para manejar caracteres especiales
+		comando = f'{AZ_CMD} login --service-principal -u {client} -p "{secret}" --tenant {tenant}'
+		resultado = subprocess.run(comando, capture_output=True, text=True, shell=True)
+		if resultado.returncode == 0:
+			return True
+		else:
+			# Devolver stderr o stdout para diagnóstico
+			return f"Error en az login: {resultado.stderr.strip() or resultado.stdout.strip()}"
+	except Exception as e:
+		return f"Exception en az_login: {e}"

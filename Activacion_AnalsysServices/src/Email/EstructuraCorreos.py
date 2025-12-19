@@ -15,12 +15,6 @@ def _mensaje_servicio(servicio_estado):
 
 
 def Estructura_Exitoso(estado, servicio_estado=None):
-    """Genera y envía un correo de ejecución exitosa.
-
-    Parámetros:
-    - estado: texto con el estado final de la ejecución.
-    - servicio_estado: opcional; cadena que indica si el servicio se "pausó" o está "levantado".
-    """
     asunto = "Ejecución Exitosa - Azure Analysis Services"
 
     nota_servicio = _mensaje_servicio(servicio_estado)
@@ -42,10 +36,6 @@ def Estructura_Exitoso(estado, servicio_estado=None):
 
 
 def Estructura_Error(error, servicio_estado=None):
-    """Genera y envía un correo cuando ocurre un error.
-
-    Mantiene el parámetro opcional `servicio_estado` para consistencia y mensajes adicionales.
-    """
     asunto = "Error en Ejecución - Azure Analysis Services"
 
     nota_servicio = _mensaje_servicio(servicio_estado)

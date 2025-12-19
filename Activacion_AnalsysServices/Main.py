@@ -18,7 +18,7 @@ print(f"Hora actual: {hora}:{minute}")
 
 
 # Es la hora de reanudar el servicio (6:00 AM)
-if hora == 6 and 0 <= minute <= 5:
+if hora == 11 and 0 <= minute <= 40:
     try:
         # Login en Azure antes de intentar reanudar
         login_result = az_login_service_principal()
@@ -58,7 +58,7 @@ if hora == 6 and 0 <= minute <= 5:
 
 
 # Es la hora de pausar el servicio (6:00 PM)
-if hora == 11 and 0 <= minute <= 30:
+if hora == 18 and 0 <= minute <= 10:
     try:
         # Login en Azure antes de intentar pausar
         login_result = az_login_service_principal()

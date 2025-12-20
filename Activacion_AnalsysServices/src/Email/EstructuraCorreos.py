@@ -5,7 +5,7 @@ def _mensaje_servicio(servicio_estado):
     if not servicio_estado:
         return ""
 
-    estado = str(servicio_estado).lower()
+    estado = str(servicio_estado)
     if estado in ("Paused"):
         return "<p><b>Nota:</b> Se pausó el servicio.</p>"
     if estado in ("Succeeded"):
@@ -14,10 +14,10 @@ def _mensaje_servicio(servicio_estado):
     return f"<p><b>Nota:</b> Estado del servicio: {servicio_estado}</p>"
 
 
-def Estructura_Exitoso(estado, servicio_estado=None):
+def Estructura_Exitoso(estado):
     asunto = "Ejecución Exitosa - Azure Analysis Services"
 
-    nota_servicio = _mensaje_servicio(servicio_estado)
+    nota_servicio = _mensaje_servicio(estado)
 
     body = (
         "<html>"

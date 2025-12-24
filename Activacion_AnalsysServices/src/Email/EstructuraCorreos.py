@@ -51,3 +51,24 @@ def Estructura_Error(error):
     )
 
     Envio_Correo(asunto, body)
+
+
+def Estructura_festivo(estado):
+    asunto = "Día Festivo - Azure Analysis Services"
+
+    nota_servicio = _mensaje_servicio(estado)
+
+    body = (
+        "<html>"
+        "<body>"
+        "<p>Estimado usuario,</p>"
+        "<p>Hoy es <b>día festivo</b> en Colombia.<br>"
+        "No se realiza ninguna acción sobre Azure Analysis Services por este motivo.</p>"
+        f"<p><b>Estado final:</b> {estado}</p>"
+        f"{nota_servicio}"
+        "<p>Saludos,<br>Equipo de Automatización</p>"
+        "</body>"
+        "</html>"
+    )
+
+    Envio_Correo(asunto, body)

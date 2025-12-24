@@ -1,20 +1,42 @@
 from datetime import datetime
-import os
-import time
+import os, sys, time
 
-from src.Email.EstructuraCorreos import Estructura_Exitoso, Estructura_Error
+from src.Email.EstructuraCorreos import Estructura_Exitoso, Estructura_Error, Estructura_festivo
 from src.Modules.EjecucionAzure import (
     obtener_estado_analysis_services,
     pausar_analysis_services,
     reanudar_analysis_services,
     az_login_service_principal,
 )
+from src.Modules.DiasFestivos import ValidarDiasFestivos
 
 # Obtenemos la hora y el minuto actual
 hora = datetime.now().hour
 minute = datetime.now().minute
 
 print(f"Hora actual: {hora}:{minute}")
+
+# Validar si hoy es día festivo
+dia_actual, es_festivo = ValidarDiasFestivos()
+
+print(f"Día actual: {dia_actual}, {'Es festivo' if es_festivo else 'No es festivo'}")
+
+# Si es festivo, no hacer nada
+if es_festivo:
+    print("Hoy es un día festivo. No se realizará ninguna acción.")
+
+    # Login en Azure antes de intentar reanudar
+    login_result = az_login_service_principal()
+    if login_result is not True:
+        print(f"Error en az login: {login_result}")
+        Estructura_Error(f"Error en az login: {login_result}")
+        raise SystemExit(1)
+    
+    estado = obtener_estado_analysis_services()
+    print(f"Estado actual de Analysis Services dia festivo: {estado}")
+    Estructura_festivo(estado.strip('"'))
+
+    raise sys.exit(0)
 
 
 # Es la hora de reanudar el servicio (6:00 AM)
